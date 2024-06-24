@@ -7,7 +7,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <form action="guarda.php" method="post" enctype="multipart/form-data">
+            <div "mb-3">
+                <label for="nombre"class="form-label">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" required>
+            </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
