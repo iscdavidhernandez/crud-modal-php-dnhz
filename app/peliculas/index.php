@@ -1,5 +1,10 @@
 <?php
  require '../config/database.php';
+
+ $sqlPeliculas = "SELECT p.id, p.nombre, p.descripcion, g.nombre AS 'genero' FROM pelicula AS p INNER JOIN genero AS g ON p.id_genero = g.id;  ";
+
+ $peliculas = $conn->query($sqlPeliculas)
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +25,7 @@
                 data-bs-toggle="modal" data-bs-target="#nuevoModal"><i class="fa-solid fa-circle-plus"></i> Nuevo registro</a>
             </div>
         </div>
-        <table class="table table-sm table-striped table-hover mt-4">
+        <table class="table  table-sm table-striped table-hover mt-4">
             <thead>
                 <tr>
                     <th>#</th>
@@ -31,6 +36,19 @@
                     <th>Acción</th>
                 </tr>
             </thead>
+            <tbody>
+                <?php while($row_pelicula = $peliculas->fetch_assoc()){ ?>
+                    <tr>
+                        <td><?= $row_pelicula['id']; ?></td>
+                        <td><?= $row_pelicula['nombre']; ?></td>
+                        <td><?= $row_pelicula['descripcion']; ?></td>
+                        <td><?= $row_pelicula['genero']; ?></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <?php } ?>
+
+            </tbody>
         </table>
     </div>
 
