@@ -44,7 +44,10 @@
                         <td><?= $row_pelicula['descripcion']; ?></td>
                         <td><?= $row_pelicula['genero']; ?></td>
                         <td></td>
-                        <td></td>
+                        <td>
+                            <a href="#"class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editaModal"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                            <a href="#"class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i>Eliminar</a>
+                        </td>
                     </tr>
                 <?php } ?>
 
@@ -57,6 +60,7 @@
     $generos = $conn->query($sqlGenero);
     ?>
     <?php include 'nuevoModal.php'; ?>
+    <?php include 'editaModal.php'; ?>
     <script>
 
     </script>
