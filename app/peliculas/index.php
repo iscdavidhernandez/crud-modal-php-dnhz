@@ -45,7 +45,7 @@
                         <td><?= $row_pelicula['genero']; ?></td>
                         <td></td>
                         <td>
-                            <a href="#"class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editaModal"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
+                            <a href="#"class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                             <a href="#"class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i>Eliminar</a>
                         </td>
                     </tr>
@@ -62,6 +62,34 @@
     <?php include 'nuevoModal.php'; ?>
     <?php include 'editaModal.php'; ?>
     <script>
+        let editaModal = document.getElementById('editaModal')
+        editaModal.addEventListener('show.bs.modal', event=>{
+            let button =event.relatedTarget
+            let id = button.getAttribute('data-bs-id')
+
+            let inputId = editaModal.querySelector('.modal-body #id')
+            let inputNombre = editaModal.querySelector('.modal-body #nombre')
+            let inputDescripcion = editaModal.querySelector('.modal-body #descripcion')
+            let inputGenero = editaModal.querySelector('.modal-body #genero')
+
+            let url = "getPelicula.php"
+            let formData = new FormData()
+            formData.append('id',id)
+
+            fetch(url,{
+                method: "POST",
+                body:formData
+            }).then(data=>{
+                inputId.value = data.id
+                inputNombre.value = data.nombre
+                inputDescripcion.value = data.descripcion
+                inputGenero.value = data.genero
+            }).catch(err=> console.log(err))
+
+        })
+
+        
+
 
     </script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
