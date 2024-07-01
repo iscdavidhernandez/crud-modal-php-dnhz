@@ -74,12 +74,16 @@
 
             let url = "getPelicula.php"
             let formData = new FormData()
+            console.log(id)
             formData.append('id',id)
-
+            console.log(formData.id)
+            
             fetch(url,{
                 method: "POST",
                 body:formData
-            }).then(data=>{
+            }).then(response=> response.json()) 
+            .then(data=>{
+                console.log(data.nombre);
                 inputId.value = data.id
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
