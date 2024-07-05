@@ -5,7 +5,9 @@ session_start();
 
  $sqlPeliculas = "SELECT p.id, p.nombre, p.descripcion, g.nombre AS 'genero' FROM pelicula AS p INNER JOIN genero AS g ON p.id_genero = g.id;  ";
 
- $peliculas = $conn->query($sqlPeliculas)
+ $peliculas = $conn->query($sqlPeliculas);
+
+ $dir = "posters/";
 
  ?>
 <!DOCTYPE html>
@@ -27,7 +29,10 @@ session_start();
             <?= $_SESSION['msg']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        <?php } ?>
+        <?php
+            unset($_SESSION['msg']); 
+            } 
+        ?>
         <div class="row justify-content-end">
             <div class="col-auto">
                 <a href="#"class="btn btn-primary" 
@@ -52,7 +57,7 @@ session_start();
                         <td><?= $row_pelicula['nombre']; ?></td>
                         <td><?= $row_pelicula['descripcion']; ?></td>
                         <td><?= $row_pelicula['genero']; ?></td>
-                        <td></td>
+                        <td><img src="<?= $dir . $row_pelicula['id'] .'.jpg'; ?>" </td>
                         <td>
                             <a href="#"class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                             <a href="#"class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-trash"></i>Eliminar</a>
