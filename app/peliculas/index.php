@@ -1,4 +1,6 @@
 <?php
+
+session_start();
  require '../config/database.php';
 
  $sqlPeliculas = "SELECT p.id, p.nombre, p.descripcion, g.nombre AS 'genero' FROM pelicula AS p INNER JOIN genero AS g ON p.id_genero = g.id;  ";
@@ -19,6 +21,13 @@
 <body>
     <div class="container py-3">
         <h2 class="text-center">Peliculas</h2>
+        <hr>
+        <?php if(isset($_SESSION['msg'])){ ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?= $_SESSION['msg']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
         <div class="row justify-content-end">
             <div class="col-auto">
                 <a href="#"class="btn btn-primary" 
