@@ -46,7 +46,7 @@
                         <td></td>
                         <td>
                             <a href="#"class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
-                            <a href="#"class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i>Eliminar</a>
+                            <a href="#"class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-trash"></i>Eliminar</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -64,8 +64,11 @@
     <?php $generos->data_seek(0) ?>
 
     <?php include 'editaModal.php'; ?>
+    
+    <?php include 'eliminaModal.php'; ?>
     <script>
         let editaModal = document.getElementById('editaModal')
+       
         editaModal.addEventListener('show.bs.modal', event=>{
             let button =event.relatedTarget
             let id = button.getAttribute('data-bs-id')
@@ -95,6 +98,14 @@
             }).catch(err=> console.log(err))
 
         })
+        //Agrega evento a elimina modal
+        let eliminaModal = document.getElementById('eliminaModal')
+        eliminaModal.addEventListener('show.bs.modal', event=>{
+            let button =event.relatedTarget
+            let id = button.getAttribute('data-bs-id')
+            eliminaModal.querySelector('.modal-footer #id').value =id
+        })
+        
 
         
 
