@@ -60,6 +60,9 @@
     $generos = $conn->query($sqlGenero);
     ?>
     <?php include 'nuevoModal.php'; ?>
+
+    <?php $generos->data_seek(0) ?>
+
     <?php include 'editaModal.php'; ?>
     <script>
         let editaModal = document.getElementById('editaModal')
@@ -74,20 +77,21 @@
 
             let url = "getPelicula.php"
             let formData = new FormData()
-            console.log(id)
+            
             formData.append('id',id)
-            console.log(formData.id)
+        
             
             fetch(url,{
                 method: "POST",
                 body:formData
             }).then(response=> response.json()) 
             .then(data=>{
-                console.log(data.nombre);
+                
                 inputId.value = data.id
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
-                inputGenero.value = data.genero
+                console.log(data.id_genero)
+                inputGenero.value = data.id_genero
             }).catch(err=> console.log(err))
 
         })

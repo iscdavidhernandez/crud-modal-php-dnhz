@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="guarda.php" method="post" enctype="multipart/form-data">
+        <form action="actualiza.php" method="post" enctype="multipart/form-data">
 
         <input type="hidden" id="id" name="id">
 
@@ -24,9 +24,8 @@
                 <select  name="genero" id="genero" class="form-control" required>
                     <option value="">Seleccionar...</option>
                     <?php while($row_genero = $generos->fetch_assoc()){ ?>
-                        <option value="<?php echo $row_genero["id"];?> "> <?= $row_genero["nombre"] ?> </option> 
+                        <option value="<?php echo $row_genero["id"];?>"> <?= $row_genero["nombre"] ?> </option> 
                     <?php } ?> 
-                    
                 </select>
             </div>
             <div class="mb-3">
