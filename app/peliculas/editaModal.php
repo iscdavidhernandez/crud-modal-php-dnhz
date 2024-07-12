@@ -28,6 +28,11 @@
                     <?php } ?> 
                 </select>
             </div>
+
+            <div class="mb-3">
+              <img id="img_poster" width="100">
+            </div>
+
             <div class="mb-3">
                 <label for="poster"class="form-label">Poster:</label>
                 <input type="file" name="poster"id="poster" class="form-control" accept="image/jpeg">

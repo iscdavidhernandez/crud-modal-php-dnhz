@@ -10,6 +10,7 @@ $sql = "INSERT INTO pelicula(nombre,descripcion,id_genero,fecha_alta) VALUES ('$
 
 if ($conn->query($sql)){
     $id = $conn->insert_id;
+    $_SESSION['color'] = "success";
     $_SESSION['msg'] = "Registro guardado";
     if($_FILES['poster']['error'] == UPLOAD_ERR_OK){
         $permitidos = array("image/jpeg","image/jpeg)");
@@ -22,12 +23,15 @@ if ($conn->query($sql)){
                 mkdir($dir,0777);
             }
             if(!move_uploaded_file($_FILES['poster']['tmp_name'],$poster)){
+                $_SESSION['color'] = "danger";
                 $_SESSION['msg'] .= "<br>Error al guardar imagen";
             }
         }else{
+            $_SESSION['color'] = "danger";
             $_SESSION['msg'] .= "<br>Formato de imagen no permitido";
         }
     }else {
+        $_SESSION['color'] = "danger";
         $_SESSION['msg'] = "Error al guardar imagen";
     }
 }

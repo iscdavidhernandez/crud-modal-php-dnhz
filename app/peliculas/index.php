@@ -25,7 +25,7 @@ session_start();
         <h2 class="text-center">Peliculas</h2>
         <hr>
         <?php if(isset($_SESSION['msg'])){ ?>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-<?= $_SESSION['color']; ?> alert-dismissible fade show" role="alert">
             <?= $_SESSION['msg']; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -57,7 +57,7 @@ session_start();
                         <td><?= $row_pelicula['nombre']; ?></td>
                         <td><?= $row_pelicula['descripcion']; ?></td>
                         <td><?= $row_pelicula['genero']; ?></td>
-                        <td><img src="<?= $dir . $row_pelicula['id'] .'.jpg'; ?>" </td>
+                        <td><img src="<?= $dir . $row_pelicula['id'] .'.jpg'; ?>" width="100"> </td>
                         <td>
                             <a href="#"class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                             <a href="#"class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#eliminaModal" data-bs-id="<?= $row_pelicula['id']; ?>"><i class="fa-solid fa-trash"></i>Eliminar</a>
@@ -91,6 +91,7 @@ session_start();
             let inputNombre = editaModal.querySelector('.modal-body #nombre')
             let inputDescripcion = editaModal.querySelector('.modal-body #descripcion')
             let inputGenero = editaModal.querySelector('.modal-body #genero')
+            let poster = editaModal.querySelector('.modal-body #img_poster')
 
             let url = "getPelicula.php"
             let formData = new FormData()
@@ -107,8 +108,9 @@ session_start();
                 inputId.value = data.id
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
-                console.log(data.id_genero)
+                console.log(data.id)
                 inputGenero.value = data.id_genero
+                poster.src = '<?= $dir ?>' + data.id + '.jpg'
             }).catch(err=> console.log(err))
 
         })
